@@ -11,7 +11,7 @@ def mavenHome = tool name: "Maven 3.6.3"
     {
     sh "${mavenHome}/bin/mvn clean package"
     }
-    
+    /*
     stage('ExecuteSonarReport')
     {
     sh "${mavenHome}/bin/mvn sonar:sonar"
@@ -29,4 +29,5 @@ def mavenHome = tool name: "Maven 3.6.3"
     sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@54.226.254.209:/opt/apache-tomcat-9.0.64/webapps/"    
     }
 }
+*/
 }
