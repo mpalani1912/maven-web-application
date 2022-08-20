@@ -1,4 +1,6 @@
-FirstNode
+pipeline{
+
+agent any
 {
 def mavenHome = tool name: "Maven_3.6.2"
 
@@ -19,6 +21,7 @@ stage('Deployment to Tomcat')
 sshagent(['5717bfef-f2c2-406a-83b6-4b2d4f8d4602'])
 {
 sh "scp -o StrictHostkeyChecking=no target/maven-web-application.war ec2-user@13.233.146.51:/opt/apache-tomcat-9.0.65/webapps/"
+}
 }
 }
 }
