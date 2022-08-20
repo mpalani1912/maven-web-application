@@ -1,4 +1,4 @@
-node1
+DevNode1
 {
 def mavenHome = tool name: "Maven_3.6.2"
 
