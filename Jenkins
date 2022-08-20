@@ -10,7 +10,7 @@ stage('Maven Build')
 {
 sh "${mavenHome}/bin/mvn package"
 }
-stage('Build Artifcats')
+stage('Upload Artifacts to Nexus')
 {
 sh "${mavenHome}/bin/mvn deploy"
 }
