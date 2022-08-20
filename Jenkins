@@ -1,28 +1,23 @@
 node
 {
-def mavenHome = tool name: "Maven_3.8.6"
+def mavenHome = tool name: "Maven_3.6.2"
 
-stage('CheckoutCode')
+stage('git pull')
 {
-git credentialsId: 'mpalani1912', url: 'https://github.com/mpalani1912/maven-web-application.git'
+git changelog: false, credentialsId: '92b897df-d40e-4ae1-99d1-545d5a511c4b', poll: false, url: 'https://github.com/mpalani1912/maven-web-application.git'
 }
-stage('Build')
+stage('Maven Build')
 {
-sh "${mavenHome}/bin/mvn clean package"
+sh "${mavenHome}/bin/mvn package"
 }
-stage('ExecuteSonarQubeReport')
-{
-sh "${mavenHome}/bin/mvn sonar:sonar"
-}
-stage('ExecuteSonarQubeReport')
+stage('Build Artifcats')
 {
 sh "${mavenHome}/bin/mvn deploy"
 }
-stage('Deploy App into Tomcat')
+stage('Deployment to Tomcat')
 {
-sshagent(['ae5e2c64-bf0e-4df7-bf75-0f5aa06e8198'])
+sshagent(['5717bfef-f2c2-406a-83b6-4b2d4f8d4602'])
 {
-sh "scp -o StrictHostkeyChecking=no target/maven-web-application.war ec2-user@3.84.181.170:/opt/apache-tomcat-9.0.64/webapps/"
-}
+sh "scp -o StrictHostkeyChecking=no target/maven-web-application.war ec2-user@13.233.146.51:/opt/apache-tomcat-9.0.65/webapps/"
 }
 }
